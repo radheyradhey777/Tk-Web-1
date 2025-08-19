@@ -1,15 +1,23 @@
+<!-- admin.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin Panel</title>
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <h2>Admin Panel</h2>
-  <ul id="allTickets"></ul>
-  <button onclick="logout()">Logout</button>
+  <nav class="navbar">
+    <h1>Admin Panel</h1>
+    <div><a href="index.html" onclick="logout()">Logout</a></div>
+  </nav>
 
-  <script type="module" src="assets/js/admin.js"></script>
+  <div class="container">
+    <h2>All Tickets</h2>
+    <div id="allTickets"></div>
+  </div>
+
+<script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>

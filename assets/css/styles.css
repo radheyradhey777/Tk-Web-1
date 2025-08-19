@@ -1,38 +1,217 @@
-.chat-box {
-  width: 400px;
-  margin: auto;
-  border: 2px solid #444;
-  border-radius: 10px;
-  padding: 15px;
-  background: #f9f9f9;
+/* ===============================
+   Global Styles
+================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.messages {
-  height: 300px;
-  overflow-y: auto;
+body {
+  background: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===============================
+   Navbar
+================================== */
+.navbar {
+  background: #2d6cdf;
+  padding: 15px 25px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar a {
+  color: #fff;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   Container
+================================== */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ===============================
+   Forms
+================================== */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input,
+form textarea,
+form select {
+  padding: 12px;
+  margin: 10px 0;
   border: 1px solid #ccc;
-  padding: 10px;
-  background: white;
-  margin-bottom: 10px;
-}
-
-.message {
-  margin: 5px 0;
-  padding: 5px 10px;
   border-radius: 8px;
+  font-size: 15px;
 }
 
-.message.me {
-  background: #d1ffd1;
-  text-align: right;
+form button {
+  background: #2d6cdf;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
 }
 
-.message.other {
-  background: #d1e0ff;
+form button:hover {
+  background: #1d4f9e;
+}
+
+/* ===============================
+   Ticket Cards
+================================== */
+.ticket {
+  background: #f9fbff;
+  border-left: 5px solid #2d6cdf;
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.ticket:hover {
+  transform: scale(1.01);
+}
+
+.ticket h3 {
+  margin-bottom: 8px;
+}
+
+.ticket small {
+  color: #666;
+  font-size: 13px;
+}
+
+/* ===============================
+   Messages
+================================== */
+.message-box {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.message.user {
+  background: #e6f0ff;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  align-self: flex-end;
+}
+
+.message.admin {
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  align-self: flex-start;
+}
+
+/* ===============================
+   Buttons
+================================== */
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #2d6cdf;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #1d4f9e;
+}
+
+.btn-danger {
+  background: #e63946;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #b3202f;
+}
+
+/* ===============================
+   Admin Panel Table
+================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 12px;
   text-align: left;
 }
 
-.input-box {
-  display: flex;
-  gap: 5px;
+table th {
+  background: #2d6cdf;
+  color: #fff;
+}
+
+table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* ===============================
+   Responsive
+================================== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  table, th, td {
+    font-size: 13px;
+  }
 }

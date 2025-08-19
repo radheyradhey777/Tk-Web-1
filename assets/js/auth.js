@@ -1,48 +1,61 @@
+// assets/js/auth.js
 import { auth, db } from "./firebase.js";
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ✅ Register Function
-async function registerUser() {
-  const email = document.getElementById("regEmail").value;
-  const password = document.getElementById("regPassword").value;
+const btnRegister = document.getElementById("btnRegister");
+const btnLogin = document.getElementById("btnLogin");
+const msg = document.getElementById("msg");
 
+btnRegister.addEventListener("click", async () => {
+  const email = document.getElementById("regEmail").value.trim();
+  const pass = document.getElementById("regPassword").value;
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    // Save user role to Firestore
-    await setDoc(doc(db, "users", user.uid), {
-      email: user.email,
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await setDoc(doc(db, "users", cred.user.uid), {
+      email: email,
       role: "user",
       createdAt: new Date()
     });
-
-    alert("✅ Registration successful!");
-    window.location.href = "dashboard.html";
-
-  } catch (error) {
-    alert("❌ " + error.message);
+    msg.style.color = "green";
+    msg.innerText = "Registered — redirecting to dashboard...";
+    setTimeout(()=> window.location.href = "dashboard.html", 900);
+  } catch (e) {
+    msg.style.color = "crimson";
+    msg.innerText = e.message;
   }
-}
+});
 
-// ✅ Login Function
-async function loginUser() {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-
+btnLogin.addEventListener("click", async () => {
+  const email = document.getElementById("loginEmail").value.trim();
+  const pass = document.getElementById("loginPassword").value;
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("✅ Login successful!");
-    window.location.href = "dashboard.html";
-  } catch (error) {
-    alert("❌ " + error.message);
+    const cred = await signInWithEmailAndPassword(auth, email, pass);
+    // get role
+    const udoc = await getDoc(doc(db, "users", cred.user.uid));
+    const role = udoc.exists() && udoc.data().role === "admin" ? "admin" : "user";
+    msg.style.color = "green";
+    msg.innerText = "Login successful — redirecting...";
+    setTimeout(()=> {
+      if (role === "admin") window.location.href = "admin.html";
+      else window.location.href = "dashboard.html";
+    }, 800);
+  } catch (e) {
+    msg.style.color = "crimson";
+    msg.innerText = e.message;
   }
-}
+});
 
-// ✅ Make available to HTML
-window.registerUser = registerUser;
-window.loginUser = loginUser;
+// keep user signed-in check (optional)
+onAuthStateChanged(auth, user => {
+  if (user) {
+    // optionally redirect to dashboard if already signed-in
+  }
+});
+
+window.logout = async function() { await signOut(auth); window.location.href = "index.html"; }

@@ -1,23 +1,32 @@
+<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>User Dashboard</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dashboard</title>
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <div class="dashboard">
-    <h2>Welcome to Dashboard</h2>
-    <a href="ticket.html">🎫 Open Ticket</a><br>
-    <button onclick="logout()">Logout</button>
+  <nav class="navbar">
+    <h1>Ticket System</h1>
+    <div>
+      <a href="index.html" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Your Tickets</h2>
+
+    <div class="form-box">
+      <input id="subject" placeholder="Ticket subject" />
+      <textarea id="firstMsg" placeholder="Describe issue..."></textarea>
+      <button id="btnCreate">Create Ticket</button>
+    </div>
+
+    <div id="ticketsContainer"></div>
   </div>
-  <script type="module">
-    import { auth } from "./assets/js/firebase.js";
-    import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    window.logout = async function () {
-      await signOut(auth);
-      window.location.href = "index.html";
-    }
-  </script>
+
+<script type="module" src="assets/js/tickets.js"></script>
 </body>
 </html>

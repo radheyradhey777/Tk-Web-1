@@ -1,29 +1,29 @@
+<!-- ticket.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ticket Chat</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ticket Chat</title>
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <div class="chat-box">
-    <h2>🎫 Ticket Chat</h2>
+  <nav class="navbar">
+    <h1>Ticket Chat</h1>
+    <div><a href="dashboard.html" onclick="logout()">Back</a></div>
+  </nav>
 
-    <div id="messages" class="messages"></div>
+  <div class="container">
+    <div id="ticketHeader"></div>
 
-    <div class="input-box">
-      <input type="text" id="messageInput" placeholder="Type a message...">
-      <button onclick="sendMessage('TICKET_ID_HERE')">Send</button>
+    <div id="messages" class="message-box"></div>
+
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <input id="messageInput" placeholder="Type a message..." />
+      <button id="btnSend" class="btn btn-primary">Send</button>
     </div>
   </div>
 
-  <script type="module" src="assets/js/messages.js"></script>
-  <script>
-    // Example: Auto load messages for a ticket
-    window.onload = () => {
-      loadMessages("TICKET_ID_HERE"); // 🔹 यहां पर dynamic ticketId डालना होगा
-    }
-  </script>
+<script type="module" src="assets/js/messages.js"></script>
 </body>
 </html>
